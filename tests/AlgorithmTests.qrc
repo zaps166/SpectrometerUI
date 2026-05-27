@@ -1,0 +1,6 @@
+<RCC>
+    <qresource>
+        <file alias="CIE_illum_LEDs_1nm.csv">CIE_illum_LEDs_1nm.csv</file>
+        <file alias="Sun.csv">Sun.csv</file>
+    </qresource>
+</RCC>
