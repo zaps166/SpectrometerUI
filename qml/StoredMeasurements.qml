@@ -82,12 +82,10 @@ Page {
         }
     }
 
-    Menu {
+    MyMenu {
         id: menu
         property string name
         property string path
-        modal: true
-        Overlay.modal: OverlayItem {}
         MenuItem {
             text: qsTr("Open")
             onTriggered: {

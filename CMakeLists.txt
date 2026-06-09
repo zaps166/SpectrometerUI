@@ -143,6 +143,7 @@ qt_add_qml_module(${PROJECT_NAME}
         qml/DIlluminantOpenDialog.qml
         qml/OverlayItem.qml
         qml/MyDialog.qml
+        qml/MyMenu.qml
     SOURCES
         Spectrum.hpp Spectrum.cpp
         CriGraph.hpp CriGraph.cpp

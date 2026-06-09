@@ -72,10 +72,8 @@ Pane {
             enabled: !continuousButton.checked
             text: qsTr("Open")
 
-            Menu {
+            MyMenu {
                 id: openMenu
-                modal: true
-                Overlay.modal: OverlayItem {}
                 MenuItem {
                     text: deviceOpenDialog.headerText
                     onTriggered: {
@@ -132,10 +130,8 @@ Pane {
                 }
             }
 
-            Menu {
+            MyMenu {
                 id: saveMenu
-                modal: true
-                Overlay.modal: OverlayItem {}
                 MenuItem {
                     text: qsTr("Store measurement")
                     onTriggered: {
