@@ -7,6 +7,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.BroadcastReceiver;
+import android.os.Build;
 import java.util.HashMap;
 
 public class UsbFD
@@ -32,6 +33,7 @@ public class UsbFD
                     }
                     else
                     {
+                        int flags = (Build.VERSION.SDK_INT >= 33) ? Context.RECEIVER_NOT_EXPORTED : 0;
                         context.registerReceiver(
                             new BroadcastReceiver() {
                                 public void onReceive(Context context, Intent intent)
@@ -46,11 +48,14 @@ public class UsbFD
                                     }
                                 }
                             },
-                            new IntentFilter(ACTION_USB_PERMISSION)
+                            new IntentFilter(ACTION_USB_PERMISSION),
+                            flags
                         );
+                        Intent permIntent = new Intent(ACTION_USB_PERMISSION);
+                        permIntent.setPackage(context.getPackageName());
                         manager.requestPermission(
                             device,
-                            PendingIntent.getBroadcast(context, 0, new Intent(ACTION_USB_PERMISSION), PendingIntent.FLAG_MUTABLE)
+                            PendingIntent.getBroadcast(context, 0, permIntent, PendingIntent.FLAG_MUTABLE)
                         );
                         callCppCode = false;
                     }
