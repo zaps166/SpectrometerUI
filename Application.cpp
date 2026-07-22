@@ -45,7 +45,6 @@ Application::Application(int &argc, char **argv)
     styleHints()->setMousePressAndHoldInterval(333);
 
     QQuickStyle::setStyle(u"Material"_s);
-    QQuickWindow::setTextRenderType(QQuickWindow::CurveTextRendering);
 }
 Application::~Application()
 {
@@ -154,6 +153,7 @@ int main(int argc, char *argv[])
     });
 #endif
 
+    qputenv("QSG_DISTANCEFIELD_ANTIALIASING", "gray");
     qputenv("QT_QUICK_CONTROLS_MATERIAL_VARIANT", "Dense");
 
     Application app(argc, argv);
