@@ -87,7 +87,7 @@ private:
     condition_variable m_cv;
 
     Commands m_commands;
+    int m_singleMeasurementAttempts = 0;
     bool m_ignoreDataForSingleMeasurement = false;
-    bool m_singleMeasurement = false;
     bool m_mustEmitCommandsFinished = false;
 };

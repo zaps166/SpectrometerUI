@@ -102,15 +102,15 @@ bool TorchBearerWorker::setParam(const QString &key, const QVariant &value)
         if (isContinuous || isSingle)
         {
             m_commands.emplace_back(GET_DATA, QByteArray());
-            m_singleMeasurement = isSingle;
+            m_singleMeasurementAttempts = isSingle ? 2 : 0;
 
             // Sometimes we obtain spectrum from previous measurement, so measure twice
-            m_ignoreDataForSingleMeasurement = m_singleMeasurement;
+            m_ignoreDataForSingleMeasurement = isSingle;
         }
         else
         {
             m_commands.emplace_back(STOP, QByteArray());
-            m_singleMeasurement = false;
+            m_singleMeasurementAttempts = 0;
         }
         ok = true;
     }
@@ -234,7 +234,7 @@ void TorchBearerWorker::run()
 
         processSpd(Data());
 
-        bool singleMeasurement = false;
+        int singleMeasurementAttempts = 0;
 
         for (;;)
         {
@@ -259,21 +259,25 @@ void TorchBearerWorker::run()
 
                 commands = std::move(m_commands);
 
-                if (m_singleMeasurement)
+                if (m_singleMeasurementAttempts > 0)
                 {
-                    singleMeasurement = m_singleMeasurement;
-                    m_singleMeasurement = false;
+                    singleMeasurementAttempts = m_singleMeasurementAttempts;
+                    m_singleMeasurementAttempts = 0;
                 }
-                else if (singleMeasurement && working && (!m_exposure.aeInProgress || (m_exposure.ae && m_exposure.time == m_maxAllowedAutoExposure)))
+                else if (singleMeasurementAttempts > 0 && working && (!m_exposure.aeInProgress || (m_exposure.ae && qFuzzyCompare(m_exposure.time, m_maxAllowedAutoExposure))))
                 {
                     if (m_ignoreDataForSingleMeasurement)
                     {
                         m_ignoreDataForSingleMeasurement = false;
                     }
+                    else if (m_exposure.aeInProgress && singleMeasurementAttempts > 1)
+                    {
+                        singleMeasurementAttempts -= 1;
+                    }
                     else
                     {
                         commands.emplace_back(STOP, QByteArray());
-                        singleMeasurement = false;
+                        singleMeasurementAttempts = 0;
                     }
                 }
             }
@@ -305,7 +309,7 @@ void TorchBearerWorker::run()
                     xferMessage(device, messageType, messageValue);
                 }
 
-                if (!singleMeasurement)
+                if (singleMeasurementAttempts <= 0)
                 {
                     processCommandsFinished();
                 }
