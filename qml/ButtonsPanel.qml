@@ -169,6 +169,7 @@ Pane {
         id: fileDialogLoader
 
         property int fileMode
+        property string currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
 
         active: false
 
@@ -178,13 +179,17 @@ Pane {
             fileMode: fileDialogLoader.fileMode
             nameFilters: AppQmlSingleton.isMobile ? [] : ["CSV files (*.csv)"]
             defaultSuffix: "csv"
-            currentFolder: StandardPaths.standardLocations(StandardPaths.DocumentsLocation)[0]
 
             Component.onCompleted: {
+                currentFolder = fileDialogLoader.currentFolder
                 open()
             }
 
             onAccepted: {
+                let dir = selectedFile.toString()
+                dir = dir.substring(0, dir.lastIndexOf("/") + 1);
+                fileDialogLoader.currentFolder = dir
+
                 if (fileMode === FileDialog.SaveFile) {
                     if (!SpectrometerBridge.storeData(selectedFile)) {
                         errorDialog.open()
@@ -192,6 +197,7 @@ Pane {
                 } else if (fileMode === FileDialog.OpenFile) {
                     root.loadFile(selectedFile)
                 }
+
                 fileDialogLoader.active = false
             }
 
