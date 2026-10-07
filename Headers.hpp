@@ -6,7 +6,6 @@
 #ifndef Q_MOC_RUN
 
 #include <QAbstractListModel>
-#include <QRegularExpression>
 #include <QElapsedTimer>
 #include <QClipboard>
 #include <QSaveFile>

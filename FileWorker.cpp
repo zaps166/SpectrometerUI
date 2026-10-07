@@ -5,6 +5,7 @@
 
 FileWorker::FileWorker(QObject *parent)
     : SpectrometerWorker(parent)
+    , m_separator(u',')
 {
 }
 FileWorker::~FileWorker()
@@ -34,6 +35,14 @@ bool FileWorker::setParam(const QString &key, const QVariant &value)
         {
             m_hintMaxNm = value.toDouble();
             return true;
+        }
+        else if (key == u"separator"_sv)
+        {
+            if (const auto separator = value.toString(); separator.size() == 1)
+            {
+                m_separator = separator[0];
+                return true;
+            }
         }
         else if (key == u"b64"_sv)
         {
@@ -81,7 +90,6 @@ void FileWorker::run()
 
     Data data;
 
-    const QRegularExpression splitRx(uR"(\,|\ |\;)"_s);
     while (!f.atEnd())
     {
         const auto line = QString::fromLatin1(f.readLine().trimmed());
@@ -107,14 +115,13 @@ void FileWorker::run()
             continue;
         }
 
-        const auto lineValues = line.split(splitRx, Qt::SkipEmptyParts);
-        if (lineValues.size() >= 2)
+        if (auto lineValues = line.split(m_separator, Qt::SkipEmptyParts); Q_LIKELY(m_col > 0) && lineValues.size() > m_col)
         {
             bool ok1 = false;
             bool ok2 = false;
             Entry entry {
-                lineValues[0].toDouble(&ok1),
-                max(0.0, lineValues.value(m_col).toDouble(&ok2)),
+                lineValues[0].replace(u',', u'.').toDouble(&ok1),
+                max(0.0, lineValues[m_col].replace(u',', u'.').toDouble(&ok2)),
             };
             if (ok1 && ok2)
             {

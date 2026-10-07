@@ -81,7 +81,7 @@ void Application::createSpectrometerWorker(const QUrl &url)
         m_spectrometerWorker->setParam(u"path"_s, url.isLocalFile() ? url.toLocalFile() : url.toString());
     }
 
-    const auto query = QUrlQuery(url).queryItems();
+    const auto query = QUrlQuery(url).queryItems(QUrl::FullyDecoded);
     for (auto &&[key, val] : query)
     {
         m_spectrometerWorker->setParam(key, val);

@@ -22,6 +22,7 @@ private:
 
 private:
     QString m_path;
-    int m_col = 1;
+    qsizetype m_col = 1;
     bool m_b64Name = false;
+    QChar m_separator;
 };
