@@ -19,10 +19,21 @@ MyListView {
         width: root.width - root.rightMargin
 
         required property int index
+        required property string id
         required property string key
         required property string value
 
         spacing: 20
+
+        MyMenu {
+            id: menu
+            MenuItem {
+                text: qsTr("Copy")
+                onTriggered: {
+                    SpectrometerBridge.copyToClipboard(delegate.id)
+                }
+            }
+        }
 
         Label {
             Layout.alignment: Qt.AlignLeft
@@ -49,6 +60,18 @@ MyListView {
 
             text: delegate.value
             wrapMode: Text.WordWrap
+        }
+
+        TapHandler {
+            onLongPressed: {
+                if (AppQmlSingleton.isMobile) {
+                    menu.popup()
+                }
+            }
+        }
+
+        ContextMenu.onRequested: {
+            menu.popup()
         }
     }
 }

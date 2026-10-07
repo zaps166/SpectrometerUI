@@ -8,6 +8,7 @@
 #include <QAbstractListModel>
 #include <QRegularExpression>
 #include <QElapsedTimer>
+#include <QClipboard>
 #include <QSaveFile>
 #include <QFileInfo>
 #include <QUrlQuery>

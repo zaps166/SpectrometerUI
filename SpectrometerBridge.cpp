@@ -367,6 +367,37 @@ bool SpectrometerBridge::deleteStoredMeasurement(const QString &name)
     return QFile::remove(Application::instance()->measurementsDir().filePath(sMeasurementFileName(name)));
 }
 
+void SpectrometerBridge::copyToClipboard(const QString &id)
+{
+    QString text;
+
+    auto getValueFromId = [this](const QString &id) {
+        if (auto it = ranges::find(m_entryList, id, &ModelEntry::id); it != m_entryList.end())
+        {
+            return it->value;
+        }
+        return QString();
+    };
+
+    if (id == g_X || id == g_Y || id == g_Z)
+    {
+        text = getValueFromId(g_X) + u" "_s + getValueFromId(g_Y) + u" "_s + getValueFromId(g_Z);
+    }
+    else if (id == g_x || id == g_y)
+    {
+        text = getValueFromId(g_x) + u" "_s + getValueFromId(g_y);
+    }
+    else
+    {
+        text = getValueFromId(id);
+    }
+
+    if (!text.isEmpty())
+    {
+        QGuiApplication::clipboard()->setText(text);
+    }
+}
+
 int SpectrometerBridge::rowCount(const QModelIndex &parent) const
 {
     return m_entryList.size();

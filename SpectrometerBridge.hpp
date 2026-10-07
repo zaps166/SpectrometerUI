@@ -79,6 +79,8 @@ public:
 
     Q_INVOKABLE bool deleteStoredMeasurement(const QString &name);
 
+    Q_INVOKABLE void copyToClipboard(const QString &id);
+
 public:
     int rowCount(const QModelIndex &parent) const;
 
