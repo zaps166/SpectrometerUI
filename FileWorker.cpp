@@ -67,7 +67,7 @@ void FileWorker::run()
 
     QFile f(m_path);
 
-    if (f.size() > pow(2.0, 24.0))
+    if (f.size() > (1ll << 24ll))
     {
         emit errorMesssage(tr("File too large"));
         return;
