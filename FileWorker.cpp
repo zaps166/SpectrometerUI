@@ -114,7 +114,7 @@ void FileWorker::run()
             bool ok2 = false;
             Entry entry {
                 lineValues[0].toDouble(&ok1),
-                lineValues.value(m_col).toDouble(&ok2),
+                max(0.0, lineValues.value(m_col).toDouble(&ok2)),
             };
             if (ok1 && ok2)
             {
