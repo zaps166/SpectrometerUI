@@ -18,39 +18,37 @@ MyDialog {
         }
     }
 
-    ColumnLayout {
-        RowLayout {
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("CCT:")
-            }
-            MyDoubleSpinBox {
-                id: cct
-                decimals: 0
-                wheelEnabled: true
-                from: 3000
-                to: 40000
-                value: 6500
-                textFromValue: (value, decimals, locale) => {
-                    return "%1 K".arg(Number(value).toLocaleString(locale, 'f', decimals))
-                }
+    GridLayout {
+        columns: 2
+
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("CCT:")
+        }
+        MyDoubleSpinBox {
+            id: cct
+            decimals: 0
+            wheelEnabled: true
+            from: 3000
+            to: 40000
+            value: 6500
+            textFromValue: (value, decimals, locale) => {
+                return "%1 K".arg(Number(value).toLocaleString(locale, 'f', decimals))
             }
         }
 
-        RowLayout {
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("Normalize:")
-            }
-            MyDoubleSpinBox {
-                id: normalize
-                decimals: 2
-                wheelEnabled: true
-                stepSize: 0.1
-                from: 0.1
-                to: 10
-                value: 1
-            }
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("Normalize:")
+        }
+        MyDoubleSpinBox {
+            id: normalize
+            decimals: 2
+            wheelEnabled: true
+            stepSize: 0.1
+            from: 0.1
+            to: 10
+            value: 1
         }
     }
 

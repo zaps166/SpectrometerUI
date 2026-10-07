@@ -22,69 +22,63 @@ MyDialog {
         }
     }
 
-    ColumnLayout {
-        RowLayout {
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("Temperature:")
-            }
-            MyDoubleSpinBox {
-                id: temperature
-                decimals: 0
-                wheelEnabled: true
-                from: 500
-                to: 1000000
-                value: 4000
-                textFromValue: (value, decimals, locale) => {
-                    return "%1 K".arg(Number(value).toLocaleString(locale, 'f', decimals))
-                }
+    GridLayout {
+        columns: 2
+
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("Temperature:")
+        }
+        MyDoubleSpinBox {
+            id: temperature
+            decimals: 0
+            wheelEnabled: true
+            from: 500
+            to: 1000000
+            value: 4000
+            textFromValue: (value, decimals, locale) => {
+                return "%1 K".arg(Number(value).toLocaleString(locale, 'f', decimals))
             }
         }
 
-        RowLayout {
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("Minimum wavelength:")
-            }
-            WavelengthSpinBox {
-                id: minWavelength
-                from: 1
-                value: 360
-                onValueChanged: {
-                    root.validate()
-                }
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("Minimum wavelength:")
+        }
+        WavelengthSpinBox {
+            id: minWavelength
+            from: 1
+            value: 360
+            onValueChanged: {
+                root.validate()
             }
         }
 
-        RowLayout {
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("Maximum wavelength:")
-            }
-            WavelengthSpinBox {
-                id: maxWavelength
-                from: 1
-                value: 830
-                onValueChanged: {
-                    root.validate()
-                }
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("Maximum wavelength:")
+        }
+        WavelengthSpinBox {
+            id: maxWavelength
+            from: 1
+            value: 830
+            onValueChanged: {
+                root.validate()
             }
         }
 
-        RowLayout {
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("Normalize:")
-            }
-            MyDoubleSpinBox {
-                id: normalize
-                decimals: 2
-                wheelEnabled: true
-                stepSize: 0.1
-                from: 0.1
-                to: 10
-                value: 1
-            }
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("Normalize:")
+        }
+        MyDoubleSpinBox {
+            id: normalize
+            decimals: 2
+            wheelEnabled: true
+            stepSize: 0.1
+            from: 0.1
+            to: 10
+            value: 1
         }
     }
 

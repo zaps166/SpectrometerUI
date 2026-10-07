@@ -34,42 +34,38 @@ MyDialog {
         }
     }
 
-    ColumnLayout {
-        RowLayout {
-            visible: device.count > 0
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("Device:")
-            }
-            MyComboBox {
-                id: device
-                model: deviceOpenDialog.visible ? SpectrometerBridge.getDevices() : null
+    GridLayout {
+        columns: 2
+
+        visible: device.count > 0
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("Device:")
+        }
+        MyComboBox {
+            id: device
+            model: deviceOpenDialog.visible ? SpectrometerBridge.getDevices() : null
+        }
+
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("Minimum wavelength:")
+        }
+        WavelengthSpinBox {
+            id: minWavelength
+            onValueChanged: {
+                deviceOpenDialog.validate()
             }
         }
 
-        RowLayout {
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("Minimum wavelength:")
-            }
-            WavelengthSpinBox {
-                id: minWavelength
-                onValueChanged: {
-                    deviceOpenDialog.validate()
-                }
-            }
+        Label {
+            Layout.fillWidth: true
+            text: qsTr("Maximum wavelength:")
         }
-
-        RowLayout {
-            Label {
-                Layout.fillWidth: true
-                text: qsTr("Maximum wavelength:")
-            }
-            WavelengthSpinBox {
-                id: maxWavelength
-                onValueChanged: {
-                    deviceOpenDialog.validate()
-                }
+        WavelengthSpinBox {
+            id: maxWavelength
+            onValueChanged: {
+                deviceOpenDialog.validate()
             }
         }
     }
