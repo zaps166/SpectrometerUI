@@ -18,11 +18,9 @@ MyDialog {
         validateMinMax(minWavelength.value, maxWavelength.value)
     }
 
-    onVisibleChanged: {
-        if (visible) {
-            colVal.forceActiveFocus()
-            validate()
-        }
+    onOpened: {
+        colVal.forceActiveFocus()
+        validate()
     }
 
     GridLayout {

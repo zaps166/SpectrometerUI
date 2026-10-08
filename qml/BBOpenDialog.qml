@@ -16,10 +16,8 @@ MyDialog {
 
     headerText: qsTr("Black body radiation")
 
-    onVisibleChanged: {
-        if (visible) {
-            temperature.forceActiveFocus()
-        }
+    onOpened: {
+        temperature.forceActiveFocus()
     }
 
     GridLayout {

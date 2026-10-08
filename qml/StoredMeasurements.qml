@@ -75,10 +75,8 @@ Page {
             }
         }
 
-        onVisibleChanged: {
-            if (!visible) {
-                initialMeasurementName = ""
-            }
+        onClosed: {
+            initialMeasurementName = ""
         }
     }
 

@@ -27,11 +27,9 @@ MyDialog {
 
     headerText: qsTr("Spectrometer device")
 
-    onVisibleChanged: {
-        if (visible) {
-            minWavelength.forceActiveFocus()
-            validate()
-        }
+    onOpened: {
+        minWavelength.forceActiveFocus()
+        validate()
     }
 
     GridLayout {

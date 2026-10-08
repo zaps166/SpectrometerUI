@@ -12,10 +12,8 @@ MyDialog {
 
     headerText: qsTr("Daylight (D-illuminant)")
 
-    onVisibleChanged: {
-        if (visible) {
-            cct.forceActiveFocus()
-        }
+    onOpened: {
+        cct.forceActiveFocus()
     }
 
     GridLayout {

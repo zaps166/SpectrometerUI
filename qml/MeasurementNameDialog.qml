@@ -35,13 +35,12 @@ MyDialog {
         }
     }
 
-    onVisibleChanged: {
-        if (visible) {
-            measurementTextField.forceActiveFocus()
-            SpectrometerBridge.setDataInternalCache(true)
-        } else {
-            SpectrometerBridge.setDataInternalCache(false)
-            measurementTextField.text = ""
-        }
+    onOpened: {
+        measurementTextField.forceActiveFocus()
+        SpectrometerBridge.setDataInternalCache(true)
+    }
+    onClosed: {
+        SpectrometerBridge.setDataInternalCache(false)
+        measurementTextField.text = ""
     }
 }
