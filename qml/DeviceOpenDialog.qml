@@ -35,13 +35,14 @@ MyDialog {
     GridLayout {
         columns: 2
 
-        visible: device.count > 0
         Label {
             Layout.fillWidth: true
+            visible: device.count > 0
             text: qsTr("Device:")
         }
         MyComboBox {
             id: device
+            visible: device.count > 0
             model: deviceOpenDialog.visible ? SpectrometerBridge.getDevices() : null
         }
 
