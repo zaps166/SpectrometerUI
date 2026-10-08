@@ -30,7 +30,6 @@ struct SpdData
 
     double cct = 0.0;
     double duv = 0.0;
-    double sdcm = 0.0;
 
     QVarLengthArray<double, 15> R;
     double Ra = 0.0;

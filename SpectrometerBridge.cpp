@@ -30,7 +30,6 @@ const auto g_ee = u"ee"_s;
 const auto g_lux = u"lux"_s;
 const auto g_cct = u"cct"_s;
 const auto g_duv = u"duv"_s;
-const auto g_sdcm = u"sdcm"_s;
 const auto g_ra = u"ra"_s;
 const auto g_rf = u"rf"_s;
 const auto g_rg = u"rg"_s;
@@ -528,12 +527,6 @@ void SpectrometerBridge::onNewSpdData(const shared_ptr<SpdData> &spdData)
         g_duv,
         u"Duv"_s,
         QString::number(spdData->duv, 'f', 4),
-        Group::Base
-    );
-    emplace(
-        g_sdcm,
-        u"SDCM"_s,
-        QString::number(spdData->sdcm, 'f', 1),
         Group::Base
     );
 

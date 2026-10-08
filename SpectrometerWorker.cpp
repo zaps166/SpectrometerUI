@@ -15,7 +15,6 @@
 #include "VitaminDActionData.hpp"
 #include "CieXyz1931TwoDegData.hpp"
 #include "ScotopicEfficiencyData.hpp"
-#include "MacAdamEllipse.hpp"
 
 const QString SpectrometerWorker::sDeviceKey = u"Device"_s;
 const QString SpectrometerWorker::sDateKey = u"Date"_s;
@@ -183,8 +182,6 @@ void SpectrometerWorker::processSpd(const Data &spd)
         dsi.reset();
 
         tie(spdData->cct, spdData->duv) = Ohno2013::computeCCT(visData);
-
-        spdData->sdcm = MacAdam::calculateSdcm(spdData->duv, spdData->cct);
 
         if (spdData->cct >= 1000.0)
         {

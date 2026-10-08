@@ -75,7 +75,6 @@ set(BACKEND_FILES
     MelanopicActionData.cpp MelanopicActionData.hpp
     Ohno2013.hpp Ohno2013.cpp
     Helpers.hpp Helpers.cpp
-    MacAdamEllipse.hpp MacAdamEllipse.cpp
     CMF10deg.inc
 )
 if(NOT USE_QT_SERIAL_PORT)
@@ -250,7 +249,6 @@ if(BUILD_TESTS)
         CieDIlluminantData.cpp
         Ohno2013.cpp
         Helpers.cpp
-        MacAdamEllipse.cpp
     )
     target_precompile_headers(AlgorithmTests PRIVATE Headers.hpp)
     target_include_directories(AlgorithmTests PRIVATE ${CMAKE_SOURCE_DIR})

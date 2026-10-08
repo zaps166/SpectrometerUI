@@ -53,7 +53,6 @@ The following parts of the program were in large part written by AI and validate
 - CH341 libusb UART driver
 - Robertson (CCT)
 - Ohno 2013 (CCT)
-- MacAdam (SDCM)
 - Duv (including graph with shader)
 - CRI (partially including bars graph)
 - TM-30 (including bars graph)
