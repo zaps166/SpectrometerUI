@@ -41,6 +41,10 @@ if(USE_ASAN)
 endif()
 
 if(CMAKE_BUILD_TYPE MATCHES "Rel")
+    option(INCLUDE_QML_CONTENTS "Include QML source code (useful for Linux distribution packaging)" OFF)
+endif()
+
+if((NOT INCLUDE_QML_CONTENTS) AND (CMAKE_BUILD_TYPE MATCHES "Rel"))
     unset(MAYBE_NO_CACHEGEN)
     set(MAYBE_DISCARD_QML_CONTENTS DISCARD_QML_CONTENTS)
 else()
