@@ -44,6 +44,10 @@ bool FileWorker::setParam(const QString &key, const QVariant &value)
                 return true;
             }
         }
+        else if (key == u"milliwatts"_sv)
+        {
+            m_mW = value.toBool();
+        }
         else if (key == u"b64"_sv)
         {
             m_b64Name = value.toBool();
@@ -125,6 +129,10 @@ void FileWorker::run()
             };
             if (ok1 && ok2)
             {
+                if (m_mW)
+                {
+                    entry.second /= 1000.0;
+                }
                 data.emplace_back(entry);
             }
         }

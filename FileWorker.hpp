@@ -25,4 +25,5 @@ private:
     qsizetype m_col = 1;
     bool m_b64Name = false;
     QChar m_separator;
+    bool m_mW = false;
 };

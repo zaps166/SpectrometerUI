@@ -44,6 +44,14 @@ MyDialog {
         }
 
         Label {
+            text: qsTr("Unit:")
+        }
+        MyComboBox {
+            id: unit
+            model: ["W/m²/nm", "mW/m²/nm"]
+        }
+
+        Label {
             text: qsTr("Irradiance column:")
         }
         MyDoubleSpinBox {
@@ -78,7 +86,7 @@ MyDialog {
     }
 
     onAccepted: {
-        SpectrometerBridge.create(path + "?col=" + colVal.value + "&min=" + minWavelength.value + "&max=" + maxWavelength.value + "&separator=" + separator.currentValue)
+        SpectrometerBridge.create(path + "?col=" + colVal.value + "&min=" + minWavelength.value + "&max=" + maxWavelength.value + "&separator=" + separator.currentValue + "&milliwatts=" + unit.currentIndex)
         path = ""
     }
 }
