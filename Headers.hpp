@@ -7,7 +7,6 @@
 
 #include <QAbstractListModel>
 #include <QElapsedTimer>
-#include <QClipboard>
 #include <QSaveFile>
 #include <QFileInfo>
 #include <QUrlQuery>
@@ -23,6 +22,7 @@
 
 # include <QColorSpace>
 # include <QStyleHints>
+# include <QClipboard>
 
 # include <QQuickWindow>
 # include <QQuickStyle>
